@@ -2,7 +2,7 @@ import tweepy
 import pandas as pd 
 from ntscraper import Nitter
 
-scraper =Nitter()
+
 client_id="a2tWNVRlZGdjY01lYlhLX2VpbW86MTpjaQ"
 client_secret="cbm6HG92m9ii9dmqVIJcAKwT5RqobIw1MWN0kDKq4YGiqwKBCr"
 
@@ -19,21 +19,22 @@ auth =tweepy.OAuth1UserHandler(api_key, api_secret, access_token, access_token_s
 
 #Very important to post tweets
 #client.create_tweet(text ="Do you want some good stuff")
-final_tweets=[]
 
-tweets= scraper.get_tweets("wheretobuy", mode='hashtag', number=5)
-
-for tweet in tweets['tweets']:
-    textTweet=[tweet['link'], tweet['text']]
-    final_tweets.append(textTweet)
-
-print(final_tweets[4])
-data =pd.DataFrame(final_tweets, columns=['link','text'])
-
-data.to_csv('./Bots/tweets.csv')
 
 #like posts with the weird numbres of the url
 #client.like("1732772751759302771")
 
 #retweet
 #client.retweet("1732772751759302771")
+
+def descargador_de_tweets():
+    scraper =Nitter()
+    tweets= scraper.get_tweets("wheretobuy", mode='hashtag', number=10)
+    with open("./datos/tweets.txt", "w") as doc:
+        for tweet in tweets['tweets']:
+            textTweet=[tweet['text']]
+            for tweets in textTweet:
+                doc.write(tweets)
+            doc.write("\n")
+
+
