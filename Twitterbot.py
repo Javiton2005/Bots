@@ -12,7 +12,7 @@ def descargador_de_tweets():
                 doc.write(tweets)
             doc.write("\n")
 
-s
+
 
 client_id="a2tWNVRlZGdjY01lYlhLX2VpbW86MTpjaQ"
 client_secret="cbm6HG92m9ii9dmqVIJcAKwT5RqobIw1MWN0kDKq4YGiqwKBCr"
