@@ -2,6 +2,17 @@ import tweepy
 import pandas as pd 
 from ntscraper import Nitter
 
+def descargador_de_tweets():
+    scraper =Nitter()
+    tweets= scraper.get_tweets("wheretobuy", mode='hashtag', number=10)
+    with open("./datos/tweets.txt", "w") as doc:
+        for tweet in tweets['tweets']:
+            textTweet=[tweet['text']]
+            for tweets in textTweet:
+                doc.write(tweets)
+            doc.write("\n")
+
+s
 
 client_id="a2tWNVRlZGdjY01lYlhLX2VpbW86MTpjaQ"
 client_secret="cbm6HG92m9ii9dmqVIJcAKwT5RqobIw1MWN0kDKq4YGiqwKBCr"
@@ -27,14 +38,6 @@ auth =tweepy.OAuth1UserHandler(api_key, api_secret, access_token, access_token_s
 #retweet
 #client.retweet("1732772751759302771")
 
-def descargador_de_tweets():
-    scraper =Nitter()
-    tweets= scraper.get_tweets("wheretobuy", mode='hashtag', number=10)
-    with open("./datos/tweets.txt", "w") as doc:
-        for tweet in tweets['tweets']:
-            textTweet=[tweet['text']]
-            for tweets in textTweet:
-                doc.write(tweets)
-            doc.write("\n")
+
 
 

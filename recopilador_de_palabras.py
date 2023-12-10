@@ -1,7 +1,7 @@
-import emoji
+from emoji import UNICODE_EMOJI, emojize
 
-def is_emoji(char):
-    return emoji.is_emoji(char)
+def is_emoji(s):
+    return s in UNICODE_EMOJI
 
 # Lista de hashtags
 hashtags = []
@@ -14,6 +14,7 @@ links = []
 
 # Lista de monosílabos
 monosilabos = []
+palabras=[]
 # Lista de nombres de archivo
 archivos = ["./datos/hashtags.txt", "./datos/links.txt", "./datos/monosilabos.txt", "./datos/palabras.txt"]
 
@@ -33,19 +34,28 @@ with open("./datos/tweets.txt", "r") as lista:
 
     # Lee todas las líneas del archivo y las almacena en una lista
     lines = lista.readlines()
-    lines = [lineas[2:] for lineas in lines]
     # Itera sobre la lista de líneas
     for line in lines:
-        
-        # Separa las palabras de la línea
         words = line.split()
 
-        # Añade las palabras a la lista de palabras
-        palabras.extend(words)
+        # Separa las palabras de la línea
+        for index, palabras in enumerate(words):
+            
+            # Si la palabra es un emoji
+            if is_emoji(palabras):
+                print("Emoji: "+palabras)
+                
+                # Elimina el emoji de la línea
+                words.pop(index)
+                
+                # Recombina las palabras sin el emoji eliminado
+                line = ' '.join(words)
+        print(line)
 
-        """for word in words:
-            if is_emoji(words[word])==True:
-                words[word]="""""
+        """for index in words:
+            if is_emoji(index)==True:
+                print("Emoji"+index)
+                palabras.replace(palabras[index],"")"""
         
         #print(words)
         # Itera sobre las palabras de la línea
@@ -60,8 +70,8 @@ with open("./datos/tweets.txt", "r") as lista:
             
             elif word[:4] =="http":
                 links.append(word)
-            else:
-                palabras.append(word)
+            """else:
+                palabras.append(word)"""
 
 hashtags.sort(key=len)
 
