@@ -16,4 +16,4 @@ url_foto=soup.find('img', attrs={'class':'a-dynamic-image'}).get('src')
 imagen=requests.get(url_foto)
 with open('./imagen_descargada','wb') as file:
     file.write(imagen.content)
-print(url_foto)
+print(frases)

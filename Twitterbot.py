@@ -17,27 +17,33 @@ def descargador_de_tweets():
 client_id="a2tWNVRlZGdjY01lYlhLX2VpbW86MTpjaQ"
 client_secret="cbm6HG92m9ii9dmqVIJcAKwT5RqobIw1MWN0kDKq4YGiqwKBCr"
 
-api_key="Fk9rwPeeqpXLaxaU2m47KdRCS"
-api_secret="Z8AQyTX1EV0YYsQkhGrVCqFxyfWQ9TBLlGgIn9mdG9JSrjTRMR"
-bearer_token= r"AAAAAAAAAAAAAAAAAAAAAEiKrQEAAAAAGrt8A5zlH9%2B%2BBZIuwjJpxSnG67M%3Dx9EAScC5yT8MNXxIE9mv3dBueMrYEIr18aekaa7N6hWTEXmUX1"
-access_token= "1731378529546235904-bFrclPSxgyscCrRaia62uYbU0XvJGc"
-access_token_secret = "Q6Vg5szqvtWuskT4WcCAfDe6fjp5Cftv8ztG4e4nIfMZu"
+api_key="pbxtGZYunNIfkk1ciZo6iTWAp"
+api_secret="rQ2mezk1L2Wo9WjKkTXLuy5V0rXfBpNhUf9lZjnfeyi2B4EO2j"
+bearer_token= "AAAAAAAAAAAAAAAAAAAAAEiKrQEAAAAAC6zjxPIdD1N2qOJIf0K%2FQHNQhDE%3DgDqrJ3CbUjztCbVrd59wDfoiXOtfzIsT9U6R6OLswX8Dz7Jlf5"
+access_token= "1731378529546235904-skJ4wAPGX8CA9M3wpFMvJomM86d1p1"
+access_token_secret = "xbuXApHZHlkNp3ZeGZUwTvbiXJCOQXtIZ2igHPgczvTiO"
 
 
-client=tweepy.Client(bearer_token,api_key, api_secret, access_token, access_token_secret)
-auth =tweepy.OAuth1UserHandler(api_key, api_secret, access_token, access_token_secret)
+"""# You can authenticate as your app with just your bearer token
+client = tweepy.Client(bearer_token=bearer_token)
+
+# You can provide the consumer key and secret with the access token and access
+# token secret to authenticate as a user
+client = tweepy.Client(
+    consumer_key=api_key, consumer_secret=api_secret,
+    access_token=access_token, access_token_secret=access_token_secret
+)
+
+response = client.(
+    text="This Tweet was Tweeted using Tweepy and Twitter API v2!"
+)
+print(f"https://twitter.com/user/status/{response.data['id']}")"""
 
 
-#Very important to post tweets
-#client.create_tweet(text ="Do you want some good stuff")
+auth = tweepy.OAuthHandler(api_key,api_secret,access_token, access_token_secret)
+auth.set_access_token(api_key,api_secret)
+print(auth.username)
+api = tweepy.API(auth, wait_on_rate_limit=True)
 
-
-#like posts with the weird numbres of the url
-#client.like("1732772751759302771")
-
-#retweet
-#client.retweet("1732772751759302771")
-
-
-
+#api.)     #  .update_status("hola")
 
