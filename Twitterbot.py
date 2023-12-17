@@ -1,5 +1,3 @@
-import tweepy
-import pandas as pd 
 from ntscraper import Nitter
 
 def descargador_de_tweets():
@@ -13,37 +11,34 @@ def descargador_de_tweets():
             doc.write("\n")
 
 
+"""
+Functions to send the tweets.
 
-client_id="a2tWNVRlZGdjY01lYlhLX2VpbW86MTpjaQ"
-client_secret="cbm6HG92m9ii9dmqVIJcAKwT5RqobIw1MWN0kDKq4YGiqwKBCr"
+Created by Jesús Jiménez Sánchez.
+"""
+import logging
+from twython import Twython
+from twython import TwythonError
+from keys import ACCESS_TOKEN, ACCESS_TOKEN_SECRET, API_KEY, API_SECRET_KEY, bearer_token
+import tweepy
 
-api_key="pbxtGZYunNIfkk1ciZo6iTWAp"
-api_secret="rQ2mezk1L2Wo9WjKkTXLuy5V0rXfBpNhUf9lZjnfeyi2B4EO2j"
-bearer_token= "AAAAAAAAAAAAAAAAAAAAAEiKrQEAAAAAC6zjxPIdD1N2qOJIf0K%2FQHNQhDE%3DgDqrJ3CbUjztCbVrd59wDfoiXOtfzIsT9U6R6OLswX8Dz7Jlf5"
-access_token= "1731378529546235904-skJ4wAPGX8CA9M3wpFMvJomM86d1p1"
-access_token_secret = "xbuXApHZHlkNp3ZeGZUwTvbiXJCOQXtIZ2igHPgczvTiO"
+client = tweepy.Client(bearer_token, API_KEY, API_SECRET_KEY, ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+auth = tweepy.OAuthHandler(API_KEY, API_SECRET_KEY, ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+api = tweepy.API(auth)
 
+client.create_tweet(text = "./imagen_descargada.jpg" )
+client
+# client.like("1613078224539615233")
 
-"""# You can authenticate as your app with just your bearer token
-client = tweepy.Client(bearer_token=bearer_token)
+# client.retweet("1613078224539615233")
 
-# You can provide the consumer key and secret with the access token and access
-# token secret to authenticate as a user
-client = tweepy.Client(
-    consumer_key=api_key, consumer_secret=api_secret,
-    access_token=access_token, access_token_secret=access_token_secret
-)
+# client.create_tweet(in_reply_to_tweet_id="1613078224539615233", text = "Keep learning Simplilearners")
 
-response = client.(
-    text="This Tweet was Tweeted using Tweepy and Twitter API v2!"
-)
-print(f"https://twitter.com/user/status/{response.data['id']}")"""
+# for tweet in api.home_timeline():
+#     print(tweet.text)
 
+# person = client.get_user(username = "narendramodi").data.id
 
-auth = tweepy.OAuthHandler(api_key,api_secret,access_token, access_token_secret)
-auth.set_access_token(api_key,api_secret)
-print(auth.username)
-api = tweepy.API(auth, wait_on_rate_limit=True)
-
-#api.)     #  .update_status("hola")
-
+# for tweet in client.get_users_tweets(person).data:
+#     print(tweet.text)
